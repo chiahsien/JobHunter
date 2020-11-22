@@ -10,7 +10,7 @@
 		094F1FE45C3D986F0F9F6563 /* Pods_JobHunter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9A940C773DAA6D8BC896BA /* Pods_JobHunter.framework */; };
 		5203174F256570C9004C9C4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5203174E256570C9004C9C4E /* AppDelegate.swift */; };
 		52031751256570C9004C9C4E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52031750256570C9004C9C4E /* SceneDelegate.swift */; };
-		52031753256570C9004C9C4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52031752256570C9004C9C4E /* ViewController.swift */; };
+		52031753256570C9004C9C4E /* JobListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52031752256570C9004C9C4E /* JobListViewController.swift */; };
 		52031756256570C9004C9C4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52031754256570C9004C9C4E /* Main.storyboard */; };
 		52031758256570CA004C9C4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52031757256570CA004C9C4E /* Assets.xcassets */; };
 		5203175B256570CA004C9C4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52031759256570CA004C9C4E /* LaunchScreen.storyboard */; };
@@ -18,6 +18,7 @@
 		524D5A0B256578E50029CFB2 /* CakeResumeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524D5A0A256578E50029CFB2 /* CakeResumeFetcher.swift */; };
 		52872C392566D21000756813 /* MeetJobsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52872C382566D20F00756813 /* MeetJobsFetcher.swift */; };
 		52872C4B2566D94900756813 /* YouratorFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52872C4A2566D94900756813 /* YouratorFetcher.swift */; };
+		52872C6E25697C0200756813 /* JobListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52872C6D25697C0200756813 /* JobListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +27,7 @@
 		5203174B256570C9004C9C4E /* JobHunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobHunter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5203174E256570C9004C9C4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52031750256570C9004C9C4E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		52031752256570C9004C9C4E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		52031752256570C9004C9C4E /* JobListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListViewController.swift; sourceTree = "<group>"; };
 		52031755256570C9004C9C4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52031757256570CA004C9C4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5203175A256570CA004C9C4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -35,6 +36,7 @@
 		524D5A0A256578E50029CFB2 /* CakeResumeFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeResumeFetcher.swift; sourceTree = "<group>"; };
 		52872C382566D20F00756813 /* MeetJobsFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetJobsFetcher.swift; sourceTree = "<group>"; };
 		52872C4A2566D94900756813 /* YouratorFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouratorFetcher.swift; sourceTree = "<group>"; };
+		52872C6D25697C0200756813 /* JobListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListTableViewCell.swift; sourceTree = "<group>"; };
 		677257192F3A3D3CEC38794C /* Pods-JobHunter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JobHunter.debug.xcconfig"; path = "Target Support Files/Pods-JobHunter/Pods-JobHunter.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,13 +83,13 @@
 			isa = PBXGroup;
 			children = (
 				524D5A04256574250029CFB2 /* Fetcher */,
+				52872C6C25697BE500756813 /* JobList */,
 				5203174E256570C9004C9C4E /* AppDelegate.swift */,
 				52031757256570CA004C9C4E /* Assets.xcassets */,
 				5203175C256570CA004C9C4E /* Info.plist */,
 				52031759256570CA004C9C4E /* LaunchScreen.storyboard */,
 				52031754256570C9004C9C4E /* Main.storyboard */,
 				52031750256570C9004C9C4E /* SceneDelegate.swift */,
-				52031752256570C9004C9C4E /* ViewController.swift */,
 			);
 			path = JobHunter;
 			sourceTree = "<group>";
@@ -101,6 +103,15 @@
 				52872C4A2566D94900756813 /* YouratorFetcher.swift */,
 			);
 			path = Fetcher;
+			sourceTree = "<group>";
+		};
+		52872C6C25697BE500756813 /* JobList */ = {
+			isa = PBXGroup;
+			children = (
+				52872C6D25697C0200756813 /* JobListTableViewCell.swift */,
+				52031752256570C9004C9C4E /* JobListViewController.swift */,
+			);
+			path = JobList;
 			sourceTree = "<group>";
 		};
 		A1DCFE78CA958961A544C4D4 /* Frameworks */ = {
@@ -228,9 +239,10 @@
 				5203174F256570C9004C9C4E /* AppDelegate.swift in Sources */,
 				524D5A0B256578E50029CFB2 /* CakeResumeFetcher.swift in Sources */,
 				524D5A062565753E0029CFB2 /* FetcherProtocol.swift in Sources */,
+				52872C6E25697C0200756813 /* JobListTableViewCell.swift in Sources */,
+				52031753256570C9004C9C4E /* JobListViewController.swift in Sources */,
 				52872C392566D21000756813 /* MeetJobsFetcher.swift in Sources */,
 				52031751256570C9004C9C4E /* SceneDelegate.swift in Sources */,
-				52031753256570C9004C9C4E /* ViewController.swift in Sources */,
 				52872C4B2566D94900756813 /* YouratorFetcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
