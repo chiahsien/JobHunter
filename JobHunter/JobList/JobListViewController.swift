@@ -8,8 +8,13 @@
 import UIKit
 
 final class JobListViewController: UIViewController {
+    private let group = DispatchGroup()
+    private let semaphore = DispatchSemaphore(value: 1)
+    private let fetchers: [Fetcher] = [MeetJobsFetcher(), CakeResumeFetcher(), YouratorFetcher()]
+
     private var jobs = [Job]()
-    private let fetcher = MeetJobsFetcher()
+    private var page: UInt = 1
+    private var isFetchingJobs = false
 
     @IBOutlet private weak var tableView: UITableView!
 
@@ -17,18 +22,7 @@ final class JobListViewController: UIViewController {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
 
-        fetcher.fetchJobs(at: 1) { [weak self] (result) in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(jobs):
-                    self.jobs.append(contentsOf: jobs)
-                    self.tableView.reloadData()
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
+        fetchJobs()
     }
 }
 
@@ -45,5 +39,47 @@ extension JobListViewController: UITableViewDataSource {
 }
 
 extension JobListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard !isFetchingJobs, indexPath.row == jobs.count - 1 else { return }
+        fetchMoreJobs()
+    }
+}
 
+private extension JobListViewController {
+    func fetchJobs() {
+        page = 1
+        fetchJobs(at: page)
+    }
+
+    func fetchMoreJobs() {
+        page += 1
+        fetchJobs(at: page)
+    }
+
+    func fetchJobs(at page: UInt) {
+        isFetchingJobs = true
+        fetchers.forEach { (fetcher) in
+            group.enter()
+            fetcher.fetchJobs(at: page) { [weak self] (result) in
+                guard let self = self else { return }
+
+                switch result {
+                case let .success(jobs):
+                    self.semaphore.wait()
+                    self.jobs.append(contentsOf: jobs)
+                    self.semaphore.signal()
+
+                case let .failure(error):
+                    print(error)
+                }
+
+                self.group.leave()
+            }
+        }
+
+        group.notify(queue: .main) {
+            self.isFetchingJobs = false
+            self.tableView.reloadData()
+        }
+    }
 }
