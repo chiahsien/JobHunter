@@ -45,14 +45,14 @@ internal extension Fetcher {
                 return
             }
 
-            guard let html = String(data: data, encoding: encoding) else {
+            guard let content = String(data: data, encoding: encoding) else {
                 let result = FetchResult<[T]>.failure(.invalidData(data))
                 completionHandler(result)
                 return
             }
 
             do {
-                let parseResult = try parser(html)
+                let parseResult = try parser(content)
                 let result: FetchResult<[T]> = (parseResult.isEmpty ? .failure(.emptyData) : .success(parseResult))
                 completionHandler(result)
             } catch {

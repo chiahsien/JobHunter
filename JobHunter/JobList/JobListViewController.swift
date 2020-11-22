@@ -12,6 +12,7 @@ final class JobListViewController: UIViewController {
     private let group = DispatchGroup()
     private let semaphore = DispatchSemaphore(value: 1)
     private let fetchers: [Fetcher] = [MeetJobsFetcher(), CakeResumeFetcher(), YouratorFetcher()]
+    private let activityView = UIActivityIndicatorView(style: .medium)
 
     private var jobs = [Job]()
     private var page: UInt = 1
@@ -21,7 +22,8 @@ final class JobListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = activityView
+        activityView.hidesWhenStopped = true
 
         fetchJobs()
     }
@@ -46,7 +48,6 @@ extension JobListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         let job = jobs[indexPath.row]
         let safari = SFSafariViewController(url: job.url)
         present(safari, animated: true, completion: nil)
@@ -66,6 +67,8 @@ private extension JobListViewController {
 
     func fetchJobs(at page: UInt) {
         isFetchingJobs = true
+        activityView.startAnimating()
+
         fetchers.forEach { (fetcher) in
             group.enter()
             fetcher.fetchJobs(at: page) { [weak self] (result) in
@@ -87,6 +90,7 @@ private extension JobListViewController {
 
         group.notify(queue: .main) {
             self.isFetchingJobs = false
+            self.activityView.stopAnimating()
             self.tableView.reloadData()
         }
     }
