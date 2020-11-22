@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 final class JobListViewController: UIViewController {
     private let group = DispatchGroup()
@@ -42,6 +43,13 @@ extension JobListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard !isFetchingJobs, indexPath.row == jobs.count - 1 else { return }
         fetchMoreJobs()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let job = jobs[indexPath.row]
+        let safari = SFSafariViewController(url: job.url)
+        present(safari, animated: true, completion: nil)
     }
 }
 
