@@ -35,15 +35,15 @@ struct CakeResumeFetcher: Fetcher {
             else { return nil }
 
             var job = Job(title: title, company: company, url: URL(string: url)!)
-            if let salary = try? e.select(".job-salary").first()?.text() {
+            if let salary = try? e.select(".job-salary").first()?.text(), !salary.isEmpty {
                 job.salary = salary
             }
 
-            if let logo = try? e.select(".job-list-item-content > .job-title > .company-logo-wrapper > img").first()?.attr("src") {
+            if let logo = try? e.select(".job-list-item-content > .job-title > .company-logo-wrapper > img").first()?.attr("src"), !logo.isEmpty {
                 job.logo = URL(string: logo)
             }
 
-            if let location = try? e.select(".job-list-item-tags .location-section").text() {
+            if let location = try? e.select(".job-list-item-tags .location-section").text(), !location.isEmpty {
                 job.location = location
             }
             return job

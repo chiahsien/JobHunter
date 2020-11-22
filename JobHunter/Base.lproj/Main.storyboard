@@ -18,74 +18,75 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SpM-yr-CSv">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="JobListTableViewCell" id="l8L-Zz-Zh8" customClass="JobListTableViewCell" customModule="JobHunter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="190"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="JobListTableViewCell" id="l8L-Zz-Zh8" customClass="JobListTableViewCell" customModule="JobHunter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="218"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l8L-Zz-Zh8" id="vfd-zx-t0E">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="190"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="218"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gzl-NX-sLH">
-                                                    <rect key="frame" x="8" y="8" width="80" height="80"/>
+                                                    <rect key="frame" x="16" y="12" width="80" height="80"/>
+                                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="hGQ-Vm-D9j"/>
                                                         <constraint firstAttribute="width" secondItem="Gzl-NX-sLH" secondAttribute="height" multiplier="1:1" id="vb9-d2-RUw"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="HMk-bo-TJQ">
-                                                    <rect key="frame" x="96" y="8" width="310" height="53"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HMk-bo-TJQ">
+                                                    <rect key="frame" x="108" y="20" width="290" height="46.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hp7-jz-FUC">
-                                                            <rect key="frame" x="0.0" y="0.0" width="310" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="290" height="20.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRP-gQ-MH7">
-                                                            <rect key="frame" x="0.0" y="32.5" width="310" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <rect key="frame" x="0.0" y="28.5" width="290" height="18"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                            <color key="textColor" systemColor="systemGray2Color"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="jdu-i4-4HT" userLabel="Info Stack View">
-                                                    <rect key="frame" x="8" y="96.5" width="398" height="85.5"/>
+                                                    <rect key="frame" x="16" y="108.5" width="382" height="85.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97D-j9-Sh6" userLabel="Location Label">
-                                                            <rect key="frame" x="0.0" y="0.0" width="398" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Salary" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kT-hX-v7U">
-                                                            <rect key="frame" x="0.0" y="32.5" width="398" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <rect key="frame" x="0.0" y="32.5" width="382" height="20.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <color key="textColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0wZ-OO-efE">
-                                                            <rect key="frame" x="0.0" y="65" width="398" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <rect key="frame" x="0.0" y="65" width="382" height="20.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <color key="textColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="HMk-bo-TJQ" firstAttribute="top" secondItem="vfd-zx-t0E" secondAttribute="top" constant="8" id="3OS-Vd-X8n"/>
+                                                <constraint firstItem="HMk-bo-TJQ" firstAttribute="top" secondItem="vfd-zx-t0E" secondAttribute="top" constant="20" id="3OS-Vd-X8n"/>
                                                 <constraint firstItem="jdu-i4-4HT" firstAttribute="leading" secondItem="Gzl-NX-sLH" secondAttribute="leading" id="5Xg-DO-B1R"/>
-                                                <constraint firstAttribute="bottom" secondItem="jdu-i4-4HT" secondAttribute="bottom" constant="8" id="6ZW-ql-9VF"/>
-                                                <constraint firstItem="Gzl-NX-sLH" firstAttribute="top" secondItem="vfd-zx-t0E" secondAttribute="top" constant="8" id="865-cN-An9"/>
-                                                <constraint firstAttribute="trailing" secondItem="jdu-i4-4HT" secondAttribute="trailing" constant="8" id="NtV-vT-QGK"/>
-                                                <constraint firstItem="jdu-i4-4HT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HMk-bo-TJQ" secondAttribute="bottom" constant="8" symbolic="YES" id="byp-PX-SlH"/>
-                                                <constraint firstItem="HMk-bo-TJQ" firstAttribute="leading" secondItem="Gzl-NX-sLH" secondAttribute="trailing" constant="8" id="iPC-y5-0OG"/>
-                                                <constraint firstItem="Gzl-NX-sLH" firstAttribute="leading" secondItem="vfd-zx-t0E" secondAttribute="leading" constant="8" id="k8P-S3-XtE"/>
-                                                <constraint firstItem="jdu-i4-4HT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Gzl-NX-sLH" secondAttribute="bottom" constant="8" symbolic="YES" id="mwI-DM-6UT"/>
-                                                <constraint firstAttribute="trailing" secondItem="HMk-bo-TJQ" secondAttribute="trailing" constant="8" id="vLe-BO-hCW"/>
+                                                <constraint firstAttribute="bottom" secondItem="jdu-i4-4HT" secondAttribute="bottom" constant="24" id="6ZW-ql-9VF"/>
+                                                <constraint firstItem="Gzl-NX-sLH" firstAttribute="top" secondItem="vfd-zx-t0E" secondAttribute="top" constant="12" id="865-cN-An9"/>
+                                                <constraint firstItem="jdu-i4-4HT" firstAttribute="trailing" secondItem="HMk-bo-TJQ" secondAttribute="trailing" id="aI3-yw-GWo"/>
+                                                <constraint firstItem="jdu-i4-4HT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HMk-bo-TJQ" secondAttribute="bottom" constant="16" id="byp-PX-SlH"/>
+                                                <constraint firstItem="HMk-bo-TJQ" firstAttribute="leading" secondItem="Gzl-NX-sLH" secondAttribute="trailing" constant="12" id="iPC-y5-0OG"/>
+                                                <constraint firstItem="Gzl-NX-sLH" firstAttribute="leading" secondItem="vfd-zx-t0E" secondAttribute="leading" constant="16" id="k8P-S3-XtE"/>
+                                                <constraint firstItem="jdu-i4-4HT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Gzl-NX-sLH" secondAttribute="bottom" constant="16" id="mwI-DM-6UT"/>
+                                                <constraint firstAttribute="trailing" secondItem="HMk-bo-TJQ" secondAttribute="trailing" constant="16" id="vLe-BO-hCW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -142,7 +143,16 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
