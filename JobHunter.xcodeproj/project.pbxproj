@@ -16,6 +16,7 @@
 		5203175B256570CA004C9C4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52031759256570CA004C9C4E /* LaunchScreen.storyboard */; };
 		524D5A062565753E0029CFB2 /* FetcherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524D5A052565753E0029CFB2 /* FetcherProtocol.swift */; };
 		524D5A0B256578E50029CFB2 /* CakeResumeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524D5A0A256578E50029CFB2 /* CakeResumeFetcher.swift */; };
+		52585D75256BEDE00052839C /* JobSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52585D74256BEDE00052839C /* JobSourceViewController.swift */; };
 		52872C392566D21000756813 /* MeetJobsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52872C382566D20F00756813 /* MeetJobsFetcher.swift */; };
 		52872C4B2566D94900756813 /* YouratorFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52872C4A2566D94900756813 /* YouratorFetcher.swift */; };
 		52872C6E25697C0200756813 /* JobListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52872C6D25697C0200756813 /* JobListTableViewCell.swift */; };
@@ -34,6 +35,7 @@
 		5203175C256570CA004C9C4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		524D5A052565753E0029CFB2 /* FetcherProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetcherProtocol.swift; sourceTree = "<group>"; };
 		524D5A0A256578E50029CFB2 /* CakeResumeFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeResumeFetcher.swift; sourceTree = "<group>"; };
+		52585D74256BEDE00052839C /* JobSourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSourceViewController.swift; sourceTree = "<group>"; };
 		52872C382566D20F00756813 /* MeetJobsFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetJobsFetcher.swift; sourceTree = "<group>"; };
 		52872C4A2566D94900756813 /* YouratorFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouratorFetcher.swift; sourceTree = "<group>"; };
 		52872C6D25697C0200756813 /* JobListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListTableViewCell.swift; sourceTree = "<group>"; };
@@ -83,7 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				524D5A04256574250029CFB2 /* Fetcher */,
-				52872C6C25697BE500756813 /* JobList */,
+				52872C6C25697BE500756813 /* Job List */,
+				52585D72256BEDAE0052839C /* Job Source List */,
 				5203174E256570C9004C9C4E /* AppDelegate.swift */,
 				52031757256570CA004C9C4E /* Assets.xcassets */,
 				5203175C256570CA004C9C4E /* Info.plist */,
@@ -105,13 +108,21 @@
 			path = Fetcher;
 			sourceTree = "<group>";
 		};
-		52872C6C25697BE500756813 /* JobList */ = {
+		52585D72256BEDAE0052839C /* Job Source List */ = {
+			isa = PBXGroup;
+			children = (
+				52585D74256BEDE00052839C /* JobSourceViewController.swift */,
+			);
+			path = "Job Source List";
+			sourceTree = "<group>";
+		};
+		52872C6C25697BE500756813 /* Job List */ = {
 			isa = PBXGroup;
 			children = (
 				52872C6D25697C0200756813 /* JobListTableViewCell.swift */,
 				52031752256570C9004C9C4E /* JobListViewController.swift */,
 			);
-			path = JobList;
+			path = "Job List";
 			sourceTree = "<group>";
 		};
 		A1DCFE78CA958961A544C4D4 /* Frameworks */ = {
@@ -241,6 +252,7 @@
 				524D5A062565753E0029CFB2 /* FetcherProtocol.swift in Sources */,
 				52872C6E25697C0200756813 /* JobListTableViewCell.swift in Sources */,
 				52031753256570C9004C9C4E /* JobListViewController.swift in Sources */,
+				52585D75256BEDE00052839C /* JobSourceViewController.swift in Sources */,
 				52872C392566D21000756813 /* MeetJobsFetcher.swift in Sources */,
 				52031751256570C9004C9C4E /* SceneDelegate.swift in Sources */,
 				52872C4B2566D94900756813 /* YouratorFetcher.swift in Sources */,
