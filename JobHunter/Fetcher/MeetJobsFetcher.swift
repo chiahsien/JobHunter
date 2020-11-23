@@ -9,7 +9,7 @@ import Foundation
 
 struct MeetJobsFetcher: Fetcher {
     var name: String {
-        return "Meet Jobs"
+        return "meet.jobs"
     }
 
     func fetchJobs(at page: UInt, completionHandler: @escaping (FetchResult<[Job]>) -> Void) {

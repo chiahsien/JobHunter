@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Job Hunter-->
+        <!--Job List-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="JobListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="JobListViewController" customModule="JobHunter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JobListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" userLabel="Job List" customClass="JobListViewController" customModule="JobHunter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="668.11594202898561" y="88.392857142857139"/>
+            <point key="canvasLocation" x="1635" y="88"/>
         </scene>
         <!--App Coordinator-->
         <scene sceneID="Ogf-CT-aAR">
@@ -138,10 +138,10 @@
             </objects>
             <point key="canvasLocation" x="-242.0289855072464" y="88.392857142857139"/>
         </scene>
-        <!--Job Hunter-->
+        <!--Source List-->
         <scene sceneID="mDJ-co-I6o">
             <objects>
-                <viewController storyboardIdentifier="JobSourceViewController" title="Job Hunter" useStoryboardIdentifierAsRestorationIdentifier="YES" id="283-cR-tHl" customClass="JobSourceViewController" customModule="JobHunter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JobSourceViewController" title="Job Hunter" useStoryboardIdentifierAsRestorationIdentifier="YES" id="283-cR-tHl" userLabel="Source List" customClass="JobSourceViewController" customModule="JobHunter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yOg-X7-7h9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -189,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="INg-Ex-Af8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="113" y="716"/>
+            <point key="canvasLocation" x="662" y="88"/>
         </scene>
     </scenes>
     <resources>

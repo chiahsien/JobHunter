@@ -10,7 +10,7 @@ import SwiftSoup
 
 struct CakeResumeFetcher: Fetcher {
     var name: String {
-        return "Cake Resume"
+        return "CakeResume"
     }
 
     func fetchJobs(at page: UInt, completionHandler: @escaping (FetchResult<[Job]>) -> Void) {
