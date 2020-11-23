@@ -24,11 +24,19 @@ struct MeetJobsFetcher: Fetcher {
             let company = meetjob.employer?.name ?? meetjob.external_employer_name ?? ""
             let encodedSlug = meetjob.slug.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
             let urlString = "https://meet.jobs/zh-TW/jobs/\(meetjob.id)-\(encodedSlug)"
-            let salary = "\(meetjob.salary.minimum) - \(meetjob.salary.maximum) \(meetjob.salary.currency) / \(meetjob.salary.paid_period)"
-            var job = Job(title: meetjob.title, company: company, url: URL(string: urlString)!, salary: salary)
+            var job = Job(title: meetjob.title, company: company, url: URL(string: urlString)!)
             job.location = meetjob.address.handwriting_city
             job.logo = meetjob.employer?.logo.url ?? meetjob.external_employer_logo_url
             job.tags = meetjob.required_skills?.map { $0.name }
+
+            var salary: String
+            if meetjob.salary.maximum != nil {
+                salary = "\(meetjob.salary.minimum) - \(meetjob.salary.maximum!)"
+            } else {
+                salary = "\(meetjob.salary.minimum)+"
+            }
+            job.salary = "\(salary) \(meetjob.salary.currency) / \(meetjob.salary.paid_period)"
+
             return job
         }
         return jobs
@@ -68,7 +76,7 @@ private extension MeetJobsFetcher {
     struct Salary: Decodable {
         let currency: String
         let minimum: Int
-        let maximum: Int
+        let maximum: Int?
         let paid_period: String
     }
 
