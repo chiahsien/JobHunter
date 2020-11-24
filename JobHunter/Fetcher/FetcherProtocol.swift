@@ -21,6 +21,9 @@ enum CustomError: Error {
     case networkError(_: Error)
     case parseError(_: Error)
     case invalidData(_: Data)
+    case serverError(code: Int)
+    case clientError(code: Int)
+    case otherResponseError(code: Int)
     case emptyData
 }
 
@@ -38,11 +41,24 @@ protocol Fetcher {
 
 internal extension Fetcher {
     func fetchContent<T>(at url: URL, encoding: String.Encoding = .utf8, using parser: @escaping Parser<T>, completionHandler: @escaping (FetchResult<[T]>) -> Void) {
-        let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
-            guard let data = data, error == nil else {
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
                 let result = FetchResult<[T]>.failure(.networkError(error!))
                 completionHandler(result)
                 return
+            }
+
+            switch response.statusCode {
+            case 400..<500:
+                let result = FetchResult<[T]>.failure(.clientError(code: response.statusCode))
+                completionHandler(result)
+                return
+            case 500..<600:
+                let result = FetchResult<[T]>.failure(.serverError(code: response.statusCode))
+                completionHandler(result)
+                return
+            default:
+                break
             }
 
             guard let content = String(data: data, encoding: encoding) else {
