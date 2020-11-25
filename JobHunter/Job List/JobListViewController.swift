@@ -10,13 +10,12 @@ import SafariServices
 
 final class JobListViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
-    private let activityView = UIActivityIndicatorView(style: .medium)
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
 
     var viewModel: JobListViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.tableFooterView = activityView
         activityView.hidesWhenStopped = true
         title = viewModel.sourceName
         fetchJobs()
