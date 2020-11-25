@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftSoup
 
 struct YouratorFetcher: Fetcher {
     var name: String {

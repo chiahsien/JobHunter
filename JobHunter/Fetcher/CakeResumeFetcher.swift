@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftSoup
 
 struct CakeResumeFetcher: Fetcher {
     var name: String {
