@@ -13,14 +13,17 @@ struct YouratorFetcher: Fetcher {
     }
 
     func fetchJobs(at page: UInt, completionHandler: @escaping (FetchResult<[Job]>) -> Void) {
-        let path = "https://www.yourator.co/api/v2/jobs?page=\(page)"
-        fetchContent(at: URL(string: path)!, using: jobsParser, completionHandler: completionHandler)
+        let urlString = "https://www.yourator.co/api/v2/jobs?page=\(page)"
+        var request = URLRequest(url: URL(string: urlString)!)
+        request.httpMethod = "GET"
+
+        fetchContent(for: request, using: jobsParser, completionHandler: completionHandler)
     }
 
     private let jobsParser: Parser<Job> = { content in
         guard let jsonData = content.data(using: .utf8) else { return [] }
         let result = try JSONDecoder().decode(Result.self, from: jsonData)
-        let jobs: [Job] = result.jobs.map { (youratorJob) in
+        let jobs: [Job] = result.jobs.map { (youratorJob) -> Job in
             var job = Job(title: youratorJob.title, company: youratorJob.company.brand, url: youratorJob.url)
             job.salary = youratorJob.salary
             job.location = youratorJob.city

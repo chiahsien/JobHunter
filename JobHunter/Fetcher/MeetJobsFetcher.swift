@@ -13,14 +13,17 @@ struct MeetJobsFetcher: Fetcher {
     }
 
     func fetchJobs(at page: UInt, completionHandler: @escaping (FetchResult<[Job]>) -> Void) {
-        let path = "https://api.meet.jobs/api/v1/jobs?page=\(page)&order=update&include=required_skills&external_job=true"
-        fetchContent(at: URL(string: path)!, using: jobsParser, completionHandler: completionHandler)
+        let urlString = "https://api.meet.jobs/api/v1/jobs?page=\(page)&order=update&include=required_skills&external_job=true"
+        var request = URLRequest(url: URL(string: urlString)!)
+        request.httpMethod = "GET"
+
+        fetchContent(for: request, using: jobsParser, completionHandler: completionHandler)
     }
 
     private let jobsParser: Parser<Job> = { content in
         guard let jsonData = content.data(using: .utf8) else { return [] }
         let result = try JSONDecoder().decode(Result.self, from: jsonData)
-        let jobs: [Job] = result.collection.map { (meetjob) in
+        let jobs: [Job] = result.collection.map { (meetjob) -> Job in
             let company = meetjob.employer?.name ?? meetjob.external_employer_name ?? ""
             let encodedSlug = meetjob.slug.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
             let urlString = "https://meet.jobs/zh-TW/jobs/\(meetjob.id)-\(encodedSlug)"

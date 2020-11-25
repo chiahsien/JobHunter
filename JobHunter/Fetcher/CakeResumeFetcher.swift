@@ -16,7 +16,7 @@ struct CakeResumeFetcher: Fetcher {
         let parameters = "{\"requests\":[{\"indexName\":\"Job_order_by_content_updated_at\",\"params\":\"query=&page=\(page - 1)&maxValuesPerFacet=150&distinct=true&facets=%5B%22location_list%22%2C%22salary_type%22%2C%22salary_currency%22%2C%22salary_range%22\"}]}"
         let postData = parameters.data(using: .utf8)
 
-        var request = URLRequest(url: URL(string: "https://966rg9m3ek-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(4.2.0)%3B%20Browser")!,timeoutInterval: 2000)
+        var request = URLRequest(url: URL(string: "https://966rg9m3ek-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(4.2.0)%3B%20Browser")!)
         request.addValue("OGRkODI5NGIwYjIxMzlkOTdlOGE1MjA0ZGM5ZjIyNjg0MTk1YWIzYmMwYmZiNzQ0ZDMxNWJlNWM0ZjY5ZjVlY3ZhbGlkVW50aWw9MTYwNjgyNDAzOSZyZXN0cmljdEluZGljZXM9Sm9iJTJDSm9iX29yZGVyX2J5X2NvbnRlbnRfdXBkYXRlZF9hdCUyQ0pvYl9wbGF5Z3JvdW5kJTJDUGFnZSUyQ1BhZ2Vfb3JkZXJfYnlfY29udGVudF91cGRhdGVkX2F0JmZpbHRlcnM9YWFzbV9zdGF0ZSUzQSslMjJjcmVhdGVkJTIyK0FORCtub2luZGV4JTNBK2ZhbHNlJmhpdHNQZXJQYWdlPTEwJmF0dHJpYnV0ZXNUb1NuaXBwZXQ9JTVCJTIyZGVzY3JpcHRpb25fcGxhaW5fdGV4dCUzQTgwJTIyJTVEJmhpZ2hsaWdodFByZVRhZz0lM0NtYXJrJTNFJmhpZ2hsaWdodFBvc3RUYWc9JTNDJTJGbWFyayUzRQ==", forHTTPHeaderField: "x-algolia-api-key")
         request.addValue("966RG9M3EK", forHTTPHeaderField: "x-algolia-application-id")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
