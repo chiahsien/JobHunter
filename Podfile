@@ -4,4 +4,5 @@ use_frameworks!
 
 target 'JobHunter' do
   pod 'Kingfisher'
+  pod 'SwiftSoup'
 end
