@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 struct YouratorFetcher: Fetcher {
     var name: String {
@@ -18,6 +19,14 @@ struct YouratorFetcher: Fetcher {
         request.httpMethod = "GET"
 
         fetchContent(for: request, using: jobsParser, completionHandler: completionHandler)
+    }
+
+    func fetchJobs(at page: UInt) -> AnyPublisher<[Job], CustomError> {
+        let urlString = "https://www.yourator.co/api/v2/jobs?page=\(page)"
+        var request = URLRequest(url: URL(string: urlString)!)
+        request.httpMethod = "GET"
+
+        return fetchContent(for: request, using: jobsParser)
     }
 
     private let jobsParser: Parser<Job> = { content in

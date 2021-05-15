@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 struct MeetJobsFetcher: Fetcher {
     var name: String {
@@ -18,6 +19,14 @@ struct MeetJobsFetcher: Fetcher {
         request.httpMethod = "GET"
 
         fetchContent(for: request, using: jobsParser, completionHandler: completionHandler)
+    }
+
+    func fetchJobs(at page: UInt) -> AnyPublisher<[Job], CustomError> {
+        let urlString = "https://api.meet.jobs/api/v1/jobs?page=\(page)&order=update&include=required_skills&external_job=true"
+        var request = URLRequest(url: URL(string: urlString)!)
+        request.httpMethod = "GET"
+
+        return fetchContent(for: request, using: jobsParser)
     }
 
     private let jobsParser: Parser<Job> = { content in
