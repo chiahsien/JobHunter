@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 final class JobListViewModel {
     private(set) var jobs = [Job]()
@@ -20,32 +21,29 @@ final class JobListViewModel {
         sourceName = fetcher.name
     }
 
-    func fetchJobs(_ completionHandler: @escaping () -> Void) {
-        fetchJobs(at: 1, completionHandler: completionHandler)
+    func fetchJobs() -> AnyPublisher<Never, CustomError> {
+        fetchJobs(at: 1)
     }
 
-    func fetchMoreJobs(_ completionHandler: @escaping () -> Void) {
-        fetchJobs(at: page + 1, completionHandler: completionHandler)
+    func fetchMoreJobs() -> AnyPublisher<Never, CustomError> {
+        fetchJobs(at: page + 1)
     }
 
-    private func fetchJobs(at page: UInt, completionHandler: @escaping () -> Void) {
-        error = nil
-        isFetchingJobs = true
-
-        fetcher.fetchJobs(at: page) { [weak self] (result) in
-            guard let self = self else { return }
-
-            switch result {
-            case let .success(jobs):
+    private func fetchJobs(at page: UInt) -> AnyPublisher<Never, CustomError> {
+        fetcher.fetchJobs(at: page)
+            .handleEvents(receiveSubscription: { _ in
+                self.error = nil
+                self.isFetchingJobs = true
+            }, receiveOutput: { jobs in
                 self.jobs.append(contentsOf: jobs)
                 self.page = page
-
-            case let .failure(error):
-                self.error = error
-            }
-
-            self.isFetchingJobs = false
-            completionHandler()
-        }
+            }, receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+                self.isFetchingJobs = false
+            })
+            .ignoreOutput()
+            .eraseToAnyPublisher()
     }
 }

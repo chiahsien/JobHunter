@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 import SafariServices
 
 final class JobListViewController: UIViewController {
@@ -13,6 +14,7 @@ final class JobListViewController: UIViewController {
     @IBOutlet weak var activityView: UIActivityIndicatorView!
 
     var viewModel: JobListViewModel!
+    var cancellables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,25 +54,37 @@ private extension JobListViewController {
         guard !viewModel.isFetchingJobs else { return }
 
         activityView.startAnimating()
-        viewModel.fetchJobs { [weak self] in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
+        viewModel.fetchJobs()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let self = self else { return }
                 self.activityView.stopAnimating()
-                self.tableView.reloadData()
-            }
-        }
+                switch completion {
+                case .finished:
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+            }, receiveValue: { _ in })
+            .store(in: &cancellables)
     }
 
     func fetchMoreJobs() {
         guard !viewModel.isFetchingJobs else { return }
 
         activityView.startAnimating()
-        viewModel.fetchMoreJobs { [weak self] in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
+        viewModel.fetchMoreJobs()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let self = self else { return }
                 self.activityView.stopAnimating()
-                self.tableView.reloadData()
-            }
-        }
+                switch completion {
+                case .finished:
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+            }, receiveValue: { _ in })
+            .store(in: &cancellables)
     }
 }
