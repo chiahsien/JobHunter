@@ -9,9 +9,11 @@ import Foundation
 import Combine
 
 final class JobListViewModel {
-    private(set) var jobs = [Job]()
-    private(set) var error: CustomError? = nil
-    private(set) var isFetchingJobs = false
+    private(set) var jobs = CurrentValueSubject<[Job], Never>([])
+    private(set) var error = CurrentValueSubject<CustomError?, Never>(nil)
+    private(set) var isFetchingJobs = CurrentValueSubject<Bool, Never>(false)
+    private var cancellables = Set<AnyCancellable>()
+
     private let fetcher: Fetcher
     private var page: UInt = 0
     let sourceName: String
@@ -21,29 +23,30 @@ final class JobListViewModel {
         sourceName = fetcher.name
     }
 
-    func fetchJobs() -> AnyPublisher<Never, CustomError> {
+    func fetchJobs() {
         fetchJobs(at: 1)
     }
 
-    func fetchMoreJobs() -> AnyPublisher<Never, CustomError> {
+    func fetchMoreJobs() {
         fetchJobs(at: page + 1)
     }
 
-    private func fetchJobs(at page: UInt) -> AnyPublisher<Never, CustomError> {
+    private func fetchJobs(at page: UInt) {
+        guard !isFetchingJobs.value else { return }
+
+        error.value = nil
+        isFetchingJobs.value = true
+
         fetcher.fetchJobs(at: page)
-            .handleEvents(receiveSubscription: { _ in
-                self.error = nil
-                self.isFetchingJobs = true
-            }, receiveOutput: { jobs in
-                self.jobs.append(contentsOf: jobs)
-                self.page = page
-            }, receiveCompletion: { completion in
+            .sink { [unowned self] completion in
                 if case .failure(let error) = completion {
-                    self.error = error
+                    self.error.value = error
                 }
-                self.isFetchingJobs = false
-            })
-            .ignoreOutput()
-            .eraseToAnyPublisher()
+                self.isFetchingJobs.value = false
+            } receiveValue: { [unowned self] jobs in
+                self.jobs.value.append(contentsOf: jobs)
+                self.page = page
+            }
+            .store(in: &cancellables)
     }
 }
