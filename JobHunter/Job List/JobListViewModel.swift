@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import Combine
 
 final class JobListViewModel {
-    private(set) var jobs = [Job]()
-    private(set) var error: CustomError? = nil
-    private(set) var isFetchingJobs = false
+    private(set) var jobs = CurrentValueSubject<[Job], Never>([])
+    private(set) var error = CurrentValueSubject<CustomError?, Never>(nil)
+    private(set) var isFetchingJobs = CurrentValueSubject<Bool, Never>(false)
+    private var cancellables = Set<AnyCancellable>()
+
     private let fetcher: Fetcher
     private var page: UInt = 0
     let sourceName: String
@@ -20,32 +23,30 @@ final class JobListViewModel {
         sourceName = fetcher.name
     }
 
-    func fetchJobs(_ completionHandler: @escaping () -> Void) {
-        fetchJobs(at: 1, completionHandler: completionHandler)
+    func fetchJobs() {
+        fetchJobs(at: 1)
     }
 
-    func fetchMoreJobs(_ completionHandler: @escaping () -> Void) {
-        fetchJobs(at: page + 1, completionHandler: completionHandler)
+    func fetchMoreJobs() {
+        fetchJobs(at: page + 1)
     }
 
-    private func fetchJobs(at page: UInt, completionHandler: @escaping () -> Void) {
-        error = nil
-        isFetchingJobs = true
+    private func fetchJobs(at page: UInt) {
+        guard !isFetchingJobs.value else { return }
 
-        fetcher.fetchJobs(at: page) { [weak self] (result) in
-            guard let self = self else { return }
+        error.value = nil
+        isFetchingJobs.value = true
 
-            switch result {
-            case let .success(jobs):
-                self.jobs.append(contentsOf: jobs)
+        fetcher.fetchJobs(at: page)
+            .sink { [unowned self] completion in
+                if case .failure(let error) = completion {
+                    self.error.value = error
+                }
+                self.isFetchingJobs.value = false
+            } receiveValue: { [unowned self] jobs in
+                self.jobs.value.append(contentsOf: jobs)
                 self.page = page
-
-            case let .failure(error):
-                self.error = error
             }
-
-            self.isFetchingJobs = false
-            completionHandler()
-        }
+            .store(in: &cancellables)
     }
 }
