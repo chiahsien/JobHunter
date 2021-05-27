@@ -13,14 +13,6 @@ struct MeetJobsFetcher: Fetcher {
         return "meet.jobs"
     }
 
-    func fetchJobs(at page: UInt, completionHandler: @escaping (FetchResult<[Job]>) -> Void) {
-        let urlString = "https://api.meet.jobs/api/v1/jobs?page=\(page)&order=update&include=required_skills&external_job=true"
-        var request = URLRequest(url: URL(string: urlString)!)
-        request.httpMethod = "GET"
-
-        fetchContent(for: request, using: jobsParser, completionHandler: completionHandler)
-    }
-
     func fetchJobs(at page: UInt) -> AnyPublisher<[Job], CustomError> {
         let urlString = "https://api.meet.jobs/api/v1/jobs?page=\(page)&order=update&include=required_skills&external_job=true"
         var request = URLRequest(url: URL(string: urlString)!)

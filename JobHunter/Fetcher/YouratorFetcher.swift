@@ -13,14 +13,6 @@ struct YouratorFetcher: Fetcher {
         return "Yourator"
     }
 
-    func fetchJobs(at page: UInt, completionHandler: @escaping (FetchResult<[Job]>) -> Void) {
-        let urlString = "https://www.yourator.co/api/v2/jobs?page=\(page)"
-        var request = URLRequest(url: URL(string: urlString)!)
-        request.httpMethod = "GET"
-
-        fetchContent(for: request, using: jobsParser, completionHandler: completionHandler)
-    }
-
     func fetchJobs(at page: UInt) -> AnyPublisher<[Job], CustomError> {
         let urlString = "https://www.yourator.co/api/v2/jobs?page=\(page)"
         var request = URLRequest(url: URL(string: urlString)!)

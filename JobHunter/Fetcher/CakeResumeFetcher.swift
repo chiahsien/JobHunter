@@ -14,13 +14,6 @@ struct CakeResumeFetcher: Fetcher {
         return "CakeResume"
     }
 
-    func fetchJobs(at page: UInt, completionHandler: @escaping (FetchResult<[Job]>) -> Void) {
-        var request = URLRequest(url: URL(string: "https://www.cakeresume.com/jobs/popular?ref=job_search_view_all_jobs&page=\(page)")!)
-        request.httpMethod = "GET"
-
-        fetchContent(for: request, using: jobsParser, completionHandler: completionHandler)
-    }
-
     func fetchJobs(at page: UInt) -> AnyPublisher<[Job], CustomError> {
         var request = URLRequest(url: URL(string: "https://www.cakeresume.com/jobs/popular?ref=job_search_view_all_jobs&page=\(page)")!)
         request.httpMethod = "GET"
